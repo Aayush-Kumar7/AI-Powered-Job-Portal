@@ -1,0 +1,16 @@
+
+/* Navbar.css */
+.navbar {
+  transition: background-color 0.3s ease;
+}
+
+.navbar-brand {
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+.btn-light:hover {
+  background-color: #f8f9fa;
+  color: #0d6efd;
+}
+
