@@ -4,10 +4,14 @@ import Navbar from "./components/Navbar";
 // import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import AdminDashboard from "./pages/AdminDashboard";
-import UserDashboard from "./pages/UserDashboard";
-import RecruiterDashboard from "./pages/Recruiterdashboard";
-// import Profile from "./pages/Profile";
+import UserDashboard from "./pages/user/UserDashboard";
+import RecruiterDashboard from "./recruiter/Recruiterdashboard";
+import AdminuserDashboard from "./pages/admin/Useradmin";
+import AdminrecruiterDashboard from "./pages/admin/recruiteradmin";
+import AdminJobs from "./pages/admin/JobAdimin";
+import HomePage from "./pages/HomePage";
+import ApplicationAdmin from "./pages/admin/Applicationadmin";
+import ApplicationUser from "./pages/user/ApplicationUser";
 // import PostJob from "./pages/PostJob";
 // import AdminPanel from "./pages/AdminPanel";
 // import JobDetails from "./pages/JobDetails";
@@ -19,13 +23,19 @@ function App() {
       <Navbar />
       <div className="container mt-4">
         <Routes>
+          <Route path="/" element={<HomePage/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
-           <Route path="/dashboard" element={<AdminDashboard />} />
+          <Route path="applicationadmin" element={<ApplicationAdmin/>}/>
              <Route path="/userdashboard" element={<UserDashboard />} />
+              <Route path="applicationuser" element={<ApplicationUser/>}/>
               <Route path="/recruiterdashboard" element={<RecruiterDashboard />} />
+              <Route path="/adminuserDashboard" element={<AdminuserDashboard/>}/>
+           <Route path="/adminrecruiterDashboard" element={<AdminrecruiterDashboard/>}/>      
+           <Route path="/adminjobs" element={<AdminJobs/>}/>  
+                 
           {/* <Route path="/" element={<Home />} />
-          
+          AdminrecruiterDashboard 
           
          
           <Route path="/profile" element={<Profile />} />

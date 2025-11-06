@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navbar = () => {
@@ -14,16 +14,56 @@ const Navbar = () => {
 
   // ✅ Hide navbar on login/register pages
   const hideNavbar =
-    location.pathname === "/login" || location.pathname === "/register";
+    location.pathname === "/" || location.pathname === "/login" || location.pathname === "/register";
 
   // ✅ Logout handler
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    navigate("/login");
+    navigate("/");
   };
 
-  if (hideNavbar) return null; // ❌ Don't render navbar on login/register pages
+  if (hideNavbar){
+    return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+      <div className="container">
+        {/* App Name (Left Side) */}
+        <Link className="navbar-brand fw-bold fs-4" to="/">
+        <i className="bi bi-briefcase-fill me-2"></i>
+          AI Job Portal
+        </Link>
+
+        {/* Toggler for mobile view */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* Links (Right Side) */}
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link text-white mx-2" to="/">Home</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white mx-2" to="/login">Login</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-white mx-2" to="/register">Signup</Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  );
+  }  // ❌ Don't render navbar on login/register pages
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary px-4 shadow-sm">

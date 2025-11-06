@@ -31,7 +31,7 @@ localStorage.setItem("user", JSON.stringify(response.data.user));
 
       // Redirect based on user role
       if (response.data.user.role === "admin") {
-        navigate("/dashboard");
+        navigate("/adminuserDashboard");
       }else if(response.data.user.role === "recruiter") {
         navigate("/recruiterdashboard");
       }
@@ -51,7 +51,7 @@ localStorage.setItem("user", JSON.stringify(response.data.user));
   return (
     <div className="d-flex align-items-center justify-content-center vh-100 bg-light">
       <div className="card shadow p-4" style={{ width: "400px", borderRadius: "15px" }}>
-        <h3 className="text-center mb-4">Login</h3>
+        <h3 className="text-center mb-4 text-primary">Login</h3>
         {message && (
           <div
             className={`alert ${
@@ -83,10 +83,11 @@ localStorage.setItem("user", JSON.stringify(response.data.user));
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              autoComplete="new-password"
             />
           </div>
 
-          <button type="submit" className="btn btn-dark w-100">
+          <button type="submit" className="btn btn-primary w-100">
             Login
           </button>
         </form>

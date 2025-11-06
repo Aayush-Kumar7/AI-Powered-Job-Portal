@@ -1,0 +1,15 @@
+.navbar .nav-link {
+  color: #ffffffcc;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #00bfff;
+  text-decoration: underline;
+}
+
+.btn-outline-danger {
+  border-radius: 20px;
+  font-weight: 500;
+}

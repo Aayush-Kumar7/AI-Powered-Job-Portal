@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import UserNavbar from "./Usernavbar";
 
 const UserDashboard = () => {
   const [jobs, setJobs] = useState([]);
@@ -15,26 +16,38 @@ const UserDashboard = () => {
     const userId = localStorage.getItem("userId");
 
     if (!token || !userId) {
-      // Instead of alert, use redirect-friendly message
       console.warn("User not logged in — redirecting to login page.");
-      navigate("/login", { state: { from: "/userdashboard" } });
+      navigate("/", { state: { from: "/userdashboard" } });
       return;
     }
   }, [navigate]);
 
-  // ✅ Fetch all jobs
+  // ✅ Fetch all jobs and user's applied jobs
   useEffect(() => {
-    const fetchJobs = async () => {
+    const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/job/alljob");
-        setJobs(res.data.jobs || []);
+        const userId = localStorage.getItem("userId");
+
+        // 1️⃣ Fetch all jobs
+        const jobsRes = await axios.get("http://localhost:8000/job/alljob");
+        setJobs(jobsRes.data.jobs || []);
+
+        // 2️⃣ Fetch user's applied jobs
+        const applicationsRes = await axios.get(
+          `http://localhost:8000/applications/applications/${userId}`
+        );
+
+        const appliedJobIds = applicationsRes.data.map(
+          (app) => app.jobId?._id // optional chaining in case of null
+        );
+        setAppliedJobs(appliedJobIds);
       } catch (error) {
-        console.error("Error fetching jobs:", error);
+        console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchJobs();
+    fetchData();
   }, []);
 
   // ✅ Apply for a job
@@ -43,13 +56,13 @@ const UserDashboard = () => {
     const token = localStorage.getItem("token");
 
     if (!userId || !token) {
-      navigate("/login", { state: { from: "/userdashboard" } });
+      navigate("/", { state: { from: "/userdashboard" } });
       return;
     }
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/applications/apply",
+        "http://localhost:8000/applications/apply",
         { userId, jobId },
         {
           headers: {
@@ -59,10 +72,13 @@ const UserDashboard = () => {
       );
 
       alert(res.data.message || "Job applied successfully!");
+      // Add the applied job to the state to disable button
       setAppliedJobs((prev) => [...prev, jobId]);
     } catch (error) {
       console.error("Error applying for job:", error);
-      alert("Failed to apply. You may have already applied.");
+      alert(
+        error.response?.data?.message || "Failed to apply. You may have already applied."
+      );
     }
   };
 
@@ -78,10 +94,7 @@ const UserDashboard = () => {
 
   return (
     <div className="container mt-4">
-      {/* Header Section */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold">Welcome to Job Portal</h2>
-      </div>
+      <UserNavbar />
 
       {/* Job List */}
       <div className="row">
@@ -105,9 +118,7 @@ const UserDashboard = () => {
                     disabled={appliedJobs.includes(job._id)}
                     onClick={() => handleApply(job._id)}
                   >
-                    {appliedJobs.includes(job._id)
-                      ? "Applied ✅"
-                      : "Apply Now"}
+                    {appliedJobs.includes(job._id) ? "Applied ✅" : "Apply Now"}
                   </button>
                 </div>
               </div>

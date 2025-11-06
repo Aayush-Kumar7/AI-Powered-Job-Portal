@@ -8,13 +8,13 @@ const Login = async (req, res) => {
     console.log("Incoming Login Data:", req.body);
 
     if (!email || !password) {
-         console.log("❌ Missing email or password");
+         console.log(" Missing email or password");
       return res.status(400).json({ msg: "Email and password required" });
     }
     const user = await UserModel.findOne({email});
 
     if (!user) {
-         console.log("❌ User not found for email:", email);
+         console.log("User not found for email:", email);
      
         return res.status(400).json({ msg: 'User not Signup' });
     }

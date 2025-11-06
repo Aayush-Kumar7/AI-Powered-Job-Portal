@@ -45,7 +45,7 @@ const RecruiterDashboard = () => {
 
     if (!recruiterId) {
       alert("Please login as recruiter first!");
-      navigate("/login");
+      navigate("/");
       return;
     }
 
@@ -151,7 +151,7 @@ const RecruiterDashboard = () => {
 
             <button
               type="submit"
-              className="btn btn-success"
+              className="btn btn-primary"
               disabled={loading}
             >
               {loading ? "Creating..." : "Create Job"}
@@ -159,44 +159,7 @@ const RecruiterDashboard = () => {
           </form>
         </div>
       </div>
-
-      {/* Applications List */}
-      <div className="card shadow-sm">
-        <div className="card-header bg-dark text-white">
-          <h5 className="mb-0">Applications Received</h5>
-        </div>
-        <div className="card-body">
-          {applications.length === 0 ? (
-            <p className="text-muted text-center">No applications yet.</p>
-          ) : (
-            <div className="table-responsive">
-              <table className="table table-bordered">
-                <thead className="table-light">
-                  <tr>
-                    <th>Applicant Name</th>
-                    <th>Email</th>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {applications.map((app, index) => (
-                    <tr key={index}>
-                      <td>{app.userName}</td>
-                      <td>{app.userEmail}</td>
-                      <td>{app.jobTitle}</td>
-                      <td>{app.company}</td>
-                      <td>{new Date(app.date).toLocaleDateString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
       </div>
-    </div>
   );
 };
 
