@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./Page.css";
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -50,7 +52,7 @@ const Signup = () => {
       }
 
       // Send data
-      await axios.post("http://localhost:8000/user/signup", formDataToSend, {
+      await axios.post(`${FRONTEND_URL}/user/signup`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

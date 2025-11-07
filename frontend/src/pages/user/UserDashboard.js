@@ -29,12 +29,12 @@ const UserDashboard = () => {
         const userId = localStorage.getItem("userId");
 
         // 1️⃣ Fetch all jobs
-        const jobsRes = await axios.get("http://localhost:8000/job/alljob");
+        const jobsRes = await axios.get(`${FRONTEND_URL}/job/alljob`);
         setJobs(jobsRes.data.jobs || []);
 
         // 2️⃣ Fetch user's applied jobs
         const applicationsRes = await axios.get(
-          `http://localhost:8000/applications/applications/${userId}`
+          `${FRONTEND_URL}/applications/applications/${userId}`
         );
 
         const appliedJobIds = applicationsRes.data.map(
@@ -62,7 +62,7 @@ const UserDashboard = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/applications/apply",
+        `${FRONTEND_URL}/applications/apply`,
         { userId, jobId },
         {
           headers: {

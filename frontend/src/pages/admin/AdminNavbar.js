@@ -1,22 +1,19 @@
 import React from "react";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js"; // ✅ important for mobile toggle
 import "./admin.css";
 
 const AdminNavbar = () => {
- 
-
-
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
       <div className="container-fluid">
-        {/* ✅ Left: Brand / Logo */}
+        {/* Left side: Brand / Logo */}
         <Link className="navbar-brand fw-bold text-uppercase" to="/admin">
           Admin Dashboard
         </Link>
 
-        {/* ✅ Mobile toggle button */}
+        {/* Mobile Toggle Button */}
         <button
           className="navbar-toggler"
           type="button"
@@ -29,39 +26,32 @@ const AdminNavbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* ✅ Right: All Links at End */}
+        {/* Collapsible Menu */}
         <div className="collapse navbar-collapse" id="adminNavbar">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-            {/* User Management */}
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center text-center text-lg-start">
             <li className="nav-item">
-              <Link className="nav-link" to="/adminuserDashboard">
+              <Link className="nav-link fw-semibold" to="/adminuserDashboard">
                 👥 Users
               </Link>
             </li>
 
-            {/* Recruiter Management */}
             <li className="nav-item">
-              <Link className="nav-link" to="/adminrecruiterDashboard">
+              <Link className="nav-link fw-semibold" to="/adminrecruiterDashboard">
                 🏢 Recruiters
               </Link>
             </li>
 
-            {/* Job Management */}
             <li className="nav-item">
-              <Link className="nav-link" to="/adminjobs">
+              <Link className="nav-link fw-semibold" to="/adminjobs">
                 💼 Jobs
               </Link>
             </li>
 
-            {/* Application Management */}
             <li className="nav-item">
-              <Link className="nav-link" to="/applicationadmin">
+              <Link className="nav-link fw-semibold" to="/applicationadmin">
                 📄 Applications
               </Link>
             </li>
-
-
-    
           </ul>
         </div>
       </div>

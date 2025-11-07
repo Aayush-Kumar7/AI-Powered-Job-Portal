@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminNavbar from "./AdminNavbar";
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const AdminrecruiterDashboard = () => {
   const [recruiters, setRecruiters] = useState([]);
@@ -19,7 +20,7 @@ const AdminrecruiterDashboard = () => {
 
   const fetchRecruiters = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/admin/recruiters");
+      const res = await axios.get(`${FRONTEND_URL}/admin/recruiters`);
       setRecruiters(res.data);
     } catch (error) {
       console.error("Error fetching recruiters:", error);
@@ -30,7 +31,7 @@ const AdminrecruiterDashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this recruiter?")) {
       try {
-        await axios.delete(`http://localhost:8000/admin/recruiters/${id}`);
+        await axios.delete(`${FRONTEND_URL}/admin/recruiters/${id}`);
         alert("Recruiter deleted successfully!");
         fetchRecruiters();
       } catch (error) {
@@ -59,7 +60,7 @@ const AdminrecruiterDashboard = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/admin/recruiters/${editingRecruiter}`, {
+      await axios.put(`${FRONTEND_URL}/admin/recruiters/${editingRecruiter}`, {
         ...formData,
       });
       alert("Recruiter updated successfully!");

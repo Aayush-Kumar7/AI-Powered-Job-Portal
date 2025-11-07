@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminNavbar from "./AdminNavbar";
-
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const AdminJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -22,7 +22,7 @@ const AdminJobs = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get("http://localhost:8000/admin/jobs");
+      const res = await axios.get(`${FRONTEND_URL}/admin/jobs`);
       setJobs(res.data);
     } catch (err) {
       console.error("Error fetching jobs:", err);
@@ -33,7 +33,7 @@ const AdminJobs = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this job?")) {
       try {
-        await axios.delete(`http://localhost:8000/admin/jobs/${id}`);
+        await axios.delete(`${FRONTEND_URL}/admin/jobs/${id}`);
         alert("Job deleted successfully!");
         fetchJobs();
       } catch (error) {
@@ -64,7 +64,7 @@ const AdminJobs = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/admin/jobs/${editingJob}`, formData);
+      await axios.put(`${FRONTEND_URL}/admin/jobs/${editingJob}`, formData);
       alert("Job updated successfully!");
       setEditingJob(null);
       fetchJobs();

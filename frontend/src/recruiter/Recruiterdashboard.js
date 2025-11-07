@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 const RecruiterDashboard = () => {
   const navigate = useNavigate();
@@ -12,23 +13,12 @@ const RecruiterDashboard = () => {
     salary: "",
     description: "",
   });
-  const [applications, setApplications] = useState([]);
+  // const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Fetch all applications when page loads
-  useEffect(() => {
-    fetchApplications();
-  }, []);
 
-  const fetchApplications = async () => {
-    try {
-      const res = await axios.get("http://localhost:8000/application/all");
-      setApplications(res.data.applications || []);
 
-    } catch (error) {
-      console.error("Error fetching applications:", error);
-    }
-  };
+  
 
   // Handle input change in create job form
   const handleChange = (e) => {
@@ -49,7 +39,7 @@ const RecruiterDashboard = () => {
       return;
     }
 
-    const res = await axios.post("http://localhost:8000/job/newjob", {
+    const res = await axios.post(`${FRONTEND_URL}/job/newjob`, {
       ...jobData,
       recruiterId,
     });

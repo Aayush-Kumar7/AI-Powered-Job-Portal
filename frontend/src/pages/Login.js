@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const Login = () => {
     try {
       console.log("Submitting:", email, password);
 
-      const response = await axios.post("http://localhost:8000/user/login", {
+      const response = await axios.post(`${FRONTEND_URL}/user/login`, {
         email,
         password,
       });

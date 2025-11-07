@@ -20,7 +20,7 @@ const ApplicationUser = () => {
       }
 
       const res = await axios.get(
-        `http://localhost:8000/user/applications/${userId}`
+        `${FRONTEND_URL}/user/applications/${userId}`
       );
       setApplications(res.data);
     } catch (error) {
