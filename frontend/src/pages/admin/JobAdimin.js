@@ -93,7 +93,7 @@ const AdminJobs = () => {
         Admin Dashboard – Manage Jobs
       </h2>
 
-      {/* ✅ Show all jobs as cards */}
+      {/*  Show all jobs as cards */}
       <div className="row">
         {jobs.length > 0 ? (
           jobs.map((job) => (
@@ -113,18 +113,18 @@ const AdminJobs = () => {
                     {job.description || "No description available."}
                   </p>
                 </div>
-                <div className="card-footer d-flex justify-content-between">
+                <div className="card-footer d-flex justify-content-end">
                   <button
                     className="btn btn-sm btn-warning"
                     onClick={() => handleEdit(job)}
                   >
-                    ✏️ Edit
+                     Edit
                   </button>
                   <button
                     className="btn btn-sm btn-danger"
                     onClick={() => handleDelete(job._id)}
                   >
-                    🗑️ Delete
+                     Delete
                   </button>
                 </div>
               </div>

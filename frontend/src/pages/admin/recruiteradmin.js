@@ -84,7 +84,7 @@ const AdminrecruiterDashboard = () => {
         Admin Dashboard - Manage Recruiters
       </h2>
 
-      {/* ✅ Recruiter Cards Section */}
+      {/*  Recruiter Cards Section */}
       {recruiters.length > 0 ? (
         <div className="row">
           {recruiters.map((rec) => (
@@ -104,13 +104,13 @@ const AdminrecruiterDashboard = () => {
                       className="btn btn-sm btn-warning"
                       onClick={() => handleEdit(rec)}
                     >
-                      ✏️ Edit
+                       Edit
                     </button>
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => handleDelete(rec._id)}
                     >
-                      🗑️ Delete
+                       Delete
                     </button>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ const AdminrecruiterDashboard = () => {
         <p>No recruiters found.</p>
       )}
 
-      {/* ✅ Edit Recruiter Form */}
+      {/*  Edit Recruiter Form */}
       {editingRecruiter && (
         <div className="card mt-4 shadow">
           <div className="card-header bg-warning text-dark">

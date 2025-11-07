@@ -5,7 +5,7 @@ import "./Homepage.css";
 
 const Home = () => {
   return (
-    <div>
+    <div className="homepage">
       {/* Hero Section with image on right */}
       <section className="py-5 bg-light">
         <div className="container">
@@ -130,7 +130,7 @@ const Home = () => {
  
 
       {/* Footer */}
-      <footer className="bg-dark text-white text-center py-3">
+      <footer className=" homepagefooter bg-dark text-white text-center py-3">
         <p className="mb-0">
           © {new Date().getFullYear()} AI-Powered Job Portal. All Rights Reserved.
         </p>
