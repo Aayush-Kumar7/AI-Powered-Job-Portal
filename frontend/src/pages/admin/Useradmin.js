@@ -3,7 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./admin.css";
 import AdminNavbar from "./AdminNavbar";
-const FRONTEND_URL = process.env.FRONTEND_URL;
+const API_URL  = process.env.REACT_APP_API_URL;
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -21,7 +21,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get(`${FRONTEND_URL}/admin/users`);
+      const res = await axios.get(`${API_URL }/admin/users`);
       setUsers(res.data);
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        await axios.delete(`${FRONTEND_URL}/admin/users/${id}`);
+        await axios.delete(`${API_URL }/admin/users/${id}`);
         alert("User deleted successfully!");
         fetchUsers();
       } catch (error) {
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`${FRONTEND_URL}/admin/users/${editingUser}`, {
+      await axios.put(`${API_URL }/admin/users/${editingUser}`, {
         ...formData,
         skills: formData.skills.split(",").map((s) => s.trim()), // convert string back to array
       });

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AdminNavbar from "./AdminNavbar"
-const FRONTEND_URL = process.env.FRONTEND_URL;
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 const ApplicationAdmin = () => {
   const [applications, setApplications] = useState([]);
@@ -14,7 +15,7 @@ const ApplicationAdmin = () => {
 
   const fetchApplications = async () => {
     try {
-      const res = await axios.get(`${FRONTEND_URL}/applications/applications`); 
+      const res = await axios.get(`${API_URL }/applications/applications`); 
       setApplications(res.data);
     } catch (error) {
       console.error("Error fetching applications:", error);
@@ -24,7 +25,7 @@ const ApplicationAdmin = () => {
   // ✅ Handle status update
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.put(`${FRONTEND_URL}/applications/applications/${id}`, {
+      await axios.put(`${API_URL }/applications/applications/${id}`, {
         status: newStatus,
       });
       alert(`Application status updated to ${newStatus}`);
@@ -38,7 +39,7 @@ const ApplicationAdmin = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this application?")) {
       try {
-        await axios.delete(`${FRONTEND_URL}/applications/applications/${id}`);
+        await axios.delete(`${API_URL }/applications/applications/${id}`);
         alert("Application deleted successfully!");
         fetchApplications();
       } catch (error) {

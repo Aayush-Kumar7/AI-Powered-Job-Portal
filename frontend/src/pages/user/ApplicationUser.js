@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserNavbar from "./Usernavbar";
-
+const API_URL = process.env.REACT_APP_API_URL;
 const ApplicationUser = () => {
   const [applications, setApplications] = useState([]);
 
@@ -20,7 +20,7 @@ const ApplicationUser = () => {
       }
 
       const res = await axios.get(
-        `${FRONTEND_URL}/user/applications/${userId}`
+        `${API_URL }/user/applications/${userId}`
       );
       setApplications(res.data);
     } catch (error) {

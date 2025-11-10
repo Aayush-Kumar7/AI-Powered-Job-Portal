@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-const FRONTEND_URL = process.env.FRONTEND_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 const RecruiterDashboard = () => {
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const RecruiterDashboard = () => {
       return;
     }
 
-    const res = await axios.post(`${FRONTEND_URL}/job/newjob`, {
+    const res = await axios.post(`${API_URL}/job/newjob`, {
       ...jobData,
       recruiterId,
     });

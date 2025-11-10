@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserNavbar from "./Usernavbar";
-
+const API_URL = process.env.REACT_APP_API_URL;
 const UserDashboard = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,12 +29,12 @@ const UserDashboard = () => {
         const userId = localStorage.getItem("userId");
 
         // 1️⃣ Fetch all jobs
-        const jobsRes = await axios.get(`${FRONTEND_URL}/job/alljob`);
+        const jobsRes = await axios.get(`${API_URL}/job/alljob`);
         setJobs(jobsRes.data.jobs || []);
 
         // 2️⃣ Fetch user's applied jobs
         const applicationsRes = await axios.get(
-          `${FRONTEND_URL}/applications/applications/${userId}`
+          `${API_URL}/applications/applications/${userId}`
         );
 
         const appliedJobIds = applicationsRes.data.map(
@@ -62,7 +62,7 @@ const UserDashboard = () => {
 
     try {
       const res = await axios.post(
-        `${FRONTEND_URL}/applications/apply`,
+        `${API_URL}/applications/apply`,
         { userId, jobId },
         {
           headers: {

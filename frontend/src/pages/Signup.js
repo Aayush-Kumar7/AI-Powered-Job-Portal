@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import "./Page.css";
-const FRONTEND_URL = process.env.FRONTEND_URL;
+const API_URL = process.env.REACT_APP_API_URL;
 
 
 const Signup = () => {
@@ -52,7 +52,7 @@ const Signup = () => {
       }
 
       // Send data
-      await axios.post(`${FRONTEND_URL}/user/signup`, formDataToSend, {
+      await axios.post(`${API_URL}/user/signup`, formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
